@@ -1,0 +1,6 @@
+Apache Spark is a powerful engine for big data processing.
+This is a simple example input file.
+Spark can run programs up to 100x faster than Hadoop.
+Some lines do not mention the keyword.
+Another line with Spark in it.
+Yet another irrelevant line.
