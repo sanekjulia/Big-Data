@@ -1,0 +1,49 @@
+Zadanie 2:
+ Delta Lake to natywna technologia zintegrowana z Databricks. Charakteryzuje się dobrą skalowalnością, szczególnie w środowiskach opartych na Apache Spark. Z kolei Apache Iceberg jest bardziej elastyczny w środowiskach wielosilnikowych.Iceberg lepiej radzi sobie z dużymi i dynamicznymi zbiorami danych, oferując większą kontrolę nad ewolucją schematu i partycjonowaniem danych.
+
+Rekomendacje zależą od scenariusza: jeśli organizacja korzysta głównie z Databricks i zależy jej na prostocie wdrożenia oraz bezproblemowej integracji, optymalnym wyborem będzie Delta Lake. Natomiast w środowiskach, które wymagają wysokiej skalowalności, działania z różnymi silnikami obliczeniowymi oraz zaawansowanej obsługi danych dynamicznych – lepszym rozwiązaniem będzie Apache Iceberg.
+
+
+Zadanie 3:
+Architektura medallion opiera się na warstwach przetwarzania danych: Bronze (surowe dane), Silver (oczyszczone dane), Gold (dane gotowe do analizy). Choć struktura ta przynosi wiele korzyści, posiada też liczne ograniczenia:
+
+Zwiększony koszt przechowywania – dane są kopiowane między warstwami, co zwiększa wykorzystanie przestrzeni dyskowej.
+
+Overengineering dla małych projektów – dla mniejszych inicjatyw architektura ta może być zbyt rozbudowana i nieopłacalna.
+
+Opóźnienia przetwarzania – wielowarstwowy model wydłuża czas dotarcia danych do warstwy analitycznej.
+
+Trudności z wersjonowaniem – śledzenie zmian w danych w wielu warstwach staje się trudne.
+
+Problemy z dynamicznymi schematami – częste zmiany w danych wejściowych komplikują aktualizację kolejnych warstw.
+
+Sztywność struktury – każda tabela musi pasować do konkretnej warstwy, co nie zawsze odpowiada potrzebom biznesowym.
+
+Wysoka krzywa uczenia się – architektura wymaga znajomości wielu narzędzi, co może być barierą wejścia.
+
+Niska wartość danych z warstwy Bronze – surowe dane często nie mają praktycznego zastosowania bez przetworzenia.
+
+Trudne debugowanie danych – ustalenie źródła błędu wymaga prześledzenia wielu kroków przetwarzania.
+
+Problemy z analizą przyczyn błędów – błędy propagowane są w górę przez warstwy, co utrudnia diagnozę.
+
+Ryzyko niespójności między warstwami – brak synchronizacji przetwarzania może prowadzić do duplikatów lub błędów.
+
+Powielanie danych – każda warstwa zawiera kopię tych samych rekordów w innym stanie przetworzenia.
+
+Dłuższy czas dostępu do danych – konieczność przetwarzania danych przez wiele warstw zwiększa opóźnienie.
+
+Złożoność operacyjna – więcej warstw to więcej pipeline’ów ETL, większe ryzyko awarii i trudności z utrzymaniem.
+
+Błędy przenoszą się między warstwami – niska jakość danych w Bronze przekłada się na błędy w Silver i Gold.
+
+Wysokie zużycie zasobów obliczeniowych – każda warstwa wymaga osobnego przetwarzania i obliczeń.
+
+Utrudniona przejrzystość danych – struktura danych może być niezrozumiała dla użytkowników nietechnicznych.
+
+Brak standaryzacji implementacji – różne zespoły mogą różnie rozumieć i implementować warstwy, prowadząc do chaosu.
+
+Większe wymagania testowe – każda warstwa musi być osobno testowana, co zwiększa koszty zapewnienia jakości.
+
+Brak elastyczności w przypadkach niestandardowych – niektóre dane mogą nie pasować do klasycznego podziału Bronze–Silver–Gold.
+
